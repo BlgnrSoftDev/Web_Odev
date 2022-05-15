@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME</title>
+    
+    <style>
+ *
+{
+    margin: 0px;
+    padding: 0px;
+    
+}
+body
+{
+    text-align: center;
+    background-color: darkgreen;
+    text-align: center;
+    padding-top: 5px;
+    cursor: url('data:image/x-icon;base64,AAACAAEAICAQAAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AACzswD/h9MAADMzABL/ZQA+GS8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAABgAAAAFBAAAAAAAAAAAAAGNgAAAUEAAAAAAAAAAAAAAGNgABQQAAAAAAAAAAAAAAAGNjBBAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAAwMDAAAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAAAEkA2NgAAAAAAAAAAAAAAASQgAGNgAAAAAAAAAAAAABJCEAAGNgAAAAAAAAAAAAEkIQAAAGAAAAAAAAAAAAASQhAAAAAAAAAAAAAAAAABJCEAAAAAAAAAAAAAAAAAEkIQAAAAAAAAAAAAAAAAASQhAAAAAAAAAAAAAAAAABJCEAAAAAAAAAAAAAAAAAEkIQAAAAAAAAAAAAAAAAASQhAAAAAAAAAAAAAAAAABJCEAAAAAAAAAAAAAAAAAEkIQAAAAAAAAAAAAAAAAASQhAAAAAAAAAAAAAAAAAEJCEAAAAAAAAAAAAAAAAABEIQAAAAAAAAAAAAAAAAAAREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD////////////////////H////h//8Pwf//B4P//wMH//8AD///gB///8A////gP///wB///4AP//8AB//+Agf//AcH//gPh//wH///4D///8B///+A////Af///gP///wH///4D///8B///+A////gf///4P///+H/////////w=='), auto;
+}
+
+.scene
+{
+    height: 750px;
+    background-color: green;
+    padding-left: 300px;
+}
+table
+{
+    border-spacing: 50px;
+    background-color: #22B14C;
+}
+tr > td
+{
+    width: 249px;
+    height: 171px;
+    background-image: url("hole.png");
+    background-repeat: no-repeat;
+}
+
+.score
+{
+    margin-top: 8px;
+    text-align: center;
+    font-size: 30px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+    padding: 10px;
+    background-color: brown;
+
+}
+
+    </style>
+    
+
+
+</head>
+<body>
+<div class="scene">
+    <table>
+        <tbody>
+            <tr>
+                <td id="0" onclick="handleEvent(0)">
+                </td>
+                <td id="1"  onclick="handleEvent(1)">
+                </td>
+                <td id="2"  onclick="handleEvent(2)">
+                </td>
+            </tr>
+            <tr>
+                <td id="3"  onclick="handleEvent(3)">
+                </td>
+                <td id="4"  onclick="handleEvent(4)">
+                </td>
+                <td id="5"  onclick="handleEvent(5)">
+                </td>                
+
+            </tr>
+            <tr>
+                <td id="6"  onclick="handleEvent(6)">
+                </td>
+                <td id="7"  onclick="handleEvent(7)">
+                </td>
+                <td id="8"  onclick="handleEvent(8)">
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+</div>
+<div class="score">
+    SKOR : <span id="score_num">0</span>
+</div>
+    <script type="text/javascript">
+        var currPosition = 0;
+var startMillis = new Date().getTime();
+var preElement = document.createElement("div");
+
+new Audio("audio.mp3").play();
+
+var x = setInterval(spawnFatih, 570);
+
+
+function spawnFatih()
+{
+    let newPosition;
+    do
+    {
+        newPosition = Math.floor(Math.random() * 9);
+        console.log(newPosition);
+    }while(newPosition == currPosition);
+
+    let temp = document.getElementById(currPosition + "");
+    preElement.remove();
+
+
+    temp = document.getElementById(newPosition + "");
+    newElement = document.createElement("img");
+
+    newElement.src = "photo.png";
+
+    temp.appendChild(newElement);
+    preElement = newElement; 
+    currPosition = newPosition;
+    let currMillis = new Date().getTime();
+    let total = (currMillis - startMillis) / 1000;
+//    console.log(total);
+    if( total >= 40)
+    {
+        window.clearInterval(x);
+        preElement.remove();
+        alert("Oyun Bitti..., yeniden oynamak için sayfayı yenileyiniz.");
+    }
+}
+
+function handleEvent(ele)
+{
+    if( ele == currPosition)
+    {
+        let score = document.getElementById("score_num");
+        console.log("tuttu");
+        score.innerText = parseInt(score.innerText) + 1;
+    }
+}
+
+
+    </script>
+</body>
+</html>
